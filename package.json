@@ -1,0 +1,19 @@
+{
+  "name": "RevStackCore.Identity.Mvc.Jwt",
+  "version": "1.0.0",
+  "description": "json web token support for AspNetCore Identity",
+  "main": "RevStackCore.Identity.Mvc.Jwt.sln",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RevStackCore/Identity.Mvc.Jwt.git"
+  },
+  "author": "S. Francis",
+  "license": "MIT",
+  "bugs": {
+		"url": "https://github.com/RevStackCore/Identity.Mvc.Jwt/issues"
+  },
+	"homepage": "https://github.com/RevStackCore/Identity.Mvc.Jwt"
+}
