@@ -1,6 +1,6 @@
 {
   "name": "RevStackCore.Identity.Mvc.Jwt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "json web token support for AspNetCore Identity",
   "main": "RevStackCore.Identity.Mvc.Jwt.sln",
   "scripts": {

@@ -50,5 +50,15 @@ namespace RevStackCore.Identity.Mvc.Jwt
             IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
             return decoder.DecodeToObject<JwtDecodedPayload>(token, secret, verify: false);
         }
+
+        public static JwtDecodedPayload ToJwtDecodedPayload(this string token, string secret)
+        {
+            IJsonSerializer serializer = new JsonNetSerializer();
+            IDateTimeProvider provider = new UtcDateTimeProvider();
+            IJwtValidator validator = new JwtValidator(serializer, provider);
+            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+            IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
+            return decoder.DecodeToObject<JwtDecodedPayload>(token, secret, verify: false);
+        }
     }
 }

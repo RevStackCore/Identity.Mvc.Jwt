@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.Identity.Mvc.Jwt</PackageId>
-    <PackageVersion>1.0.2</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>json web token support for AspNetCore Identity</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
