@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.Identity.Mvc.Jwt</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>json web token support for AspNetCore Identity</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -24,5 +24,6 @@
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Generator\" />
   </ItemGroup>
 </Project>

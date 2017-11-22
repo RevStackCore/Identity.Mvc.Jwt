@@ -16,7 +16,7 @@ namespace RevStackCore.Identity.Mvc.Jwt
         {
             var claims = new[]
             {
-               new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
@@ -25,7 +25,7 @@ namespace RevStackCore.Identity.Mvc.Jwt
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public static JwtDecodedPayload ToJwtDecodedPayload(this HttpRequest request, string secret)
+        public static JwtPayload ToJwtDecodedPayload(this HttpRequest request, string secret)
         {
             bool result = request.Headers.TryGetValue("Authorization", out var headers);
             if (!result)
@@ -48,17 +48,33 @@ namespace RevStackCore.Identity.Mvc.Jwt
             IJwtValidator validator = new JwtValidator(serializer, provider);
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
-            return decoder.DecodeToObject<JwtDecodedPayload>(token, secret, verify: false);
+            return decoder.DecodeToObject<JwtPayload>(token, secret, verify: false);
         }
 
-        public static JwtDecodedPayload ToJwtDecodedPayload(this string token, string secret)
+        public static JwtPayload ToJwtDecodedPayload(this string token, string secret)
         {
             IJsonSerializer serializer = new JsonNetSerializer();
             IDateTimeProvider provider = new UtcDateTimeProvider();
             IJwtValidator validator = new JwtValidator(serializer, provider);
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
-            return decoder.DecodeToObject<JwtDecodedPayload>(token, secret, verify: false);
+            return decoder.DecodeToObject<JwtPayload>(token, secret, verify: false);
+        }
+
+        public static T ToJwtDecodedPayload<T>(this string token, string secret)
+        {
+            IJsonSerializer serializer = new JsonNetSerializer();
+            IDateTimeProvider provider = new UtcDateTimeProvider();
+            IJwtValidator validator = new JwtValidator(serializer, provider);
+            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+            IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder);
+            return decoder.DecodeToObject<T>(token, secret, verify: false);
+        }
+
+        public static double ToUnixEpochExpiration(this DateTime src)
+        {
+            var unixEpoch = JwtValidator.UnixEpoch;
+            return Math.Round((src - unixEpoch).TotalSeconds);
         }
     }
 }
