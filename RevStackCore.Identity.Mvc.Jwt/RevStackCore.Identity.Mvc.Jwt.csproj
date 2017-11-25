@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>RevStackCore.Identity.Mvc.Jwt</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.1.1</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>json web token support for AspNetCore Identity</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.3" />
     <PackageReference Include="JWT" Version="3.1.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.4" />
-    <PackageReference Include="RevStackCore.Identity.Mvc" Version="1.1.0" />
+    <PackageReference Include="RevStackCore.Identity.Mvc" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
