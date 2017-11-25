@@ -1,12 +1,5 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="RevStackCore.Identity.Mvc.Jwt/Generator/JwtTokenGenerator.cs">
-    <Files>
-      <File FileName="RevStackCore.Identity.Mvc.Jwt/Entity/JwtPayload.cs" Line="8" Column="40" />
-      <File FileName="RevStackCore.Identity.Mvc.Jwt/Entity/JwtTokenConfiguration.cs" Line="6" Column="6" />
-      <File FileName="RevStackCore.Identity.Mvc.Jwt/Extensions/JwtExtensions.cs" Line="6" Column="11" />
-      <File FileName="RevStackCore.Identity.Mvc.Jwt/Generator/JwtTokenGenerator.cs" Line="6" Column="8" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
