@@ -25,6 +25,27 @@ namespace RevStackCore.Identity.Mvc.Jwt
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public static ClaimsPrincipal GetPrincipleFromExpiredToken(this string expiredToken, string secret, bool validateAudience=false, bool validateIssuer=false)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = validateAudience,
+                ValidateIssuer = validateIssuer,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+                ValidateLifetime = false //ignore token's expiration date
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(expiredToken, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                return null;
+
+            return principal;
+        }
+
         public static JwtPayload ToJwtDecodedPayload(this HttpRequest request, string secret)
         {
             bool result = request.Headers.TryGetValue("Authorization", out var headers);
