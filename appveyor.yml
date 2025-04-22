@@ -2,7 +2,7 @@ configuration: Release
 
 version: 1.0.{build}
 
-image: Visual Studio 2017
+image: Visual Studio 2022
 
 build:
     parallel: true
@@ -19,7 +19,7 @@ branches:
 deploy:
   provider: NuGet
   api_key:
-    secure: NsRG1nF95vnbl0Bk1WH1Y8s5md4U3oGw/A4GYZnepJ6r10AqPrRdyazpVZeyQBB8
+    secure: z6b5tfTOm7v82Ir+AbxYCFx+wF9koQI0ZRxS6Km7iCDkYpDD2UQEupYRpJVXdTBm
   skip_symbols: false
   artifact: /.*\.nupkg/
   
