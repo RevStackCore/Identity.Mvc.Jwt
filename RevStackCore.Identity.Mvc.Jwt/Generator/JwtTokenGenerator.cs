@@ -1,9 +1,10 @@
-﻿using System;
-using JWT;
-using JWT.Algorithms;
-using JWT.Serializers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
 
 namespace RevStackCore.Identity.Mvc.Jwt
 {
@@ -11,16 +12,37 @@ namespace RevStackCore.Identity.Mvc.Jwt
     {
         public string Create(string secret, object payload)
         {
-            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
-            JsonSerializer customJsonSerializer = new JsonSerializer
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var json = JsonSerializer.Serialize(payload, new JsonSerializerOptions
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            };
-            IJsonSerializer serializer = new JsonNetSerializer(customJsonSerializer);
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
-            var token = encoder.Encode(payload, secret);
-            return token;
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            var dict = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
+
+            var claims = new List<Claim>();
+            foreach (var kvp in dict)
+            {
+                if (kvp.Value.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var item in kvp.Value.EnumerateArray())
+                    {
+                        claims.Add(new Claim(kvp.Key, item.ToString()));
+                    }
+                }
+                else
+                {
+                    claims.Add(new Claim(kvp.Key, kvp.Value.ToString()));
+                }
+            }
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

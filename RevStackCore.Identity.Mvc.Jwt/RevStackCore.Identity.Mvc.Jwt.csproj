@@ -1,16 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <PackageId>RevStackCore.Identity.Mvc.Jwt</PackageId>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>9.0.0</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description>json web token support for AspNetCore Identity</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
+    <PackageReleaseNotes>Net 9.0 release</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/RevStackCore/Identity.Mvc.Jwt</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/RevStackCore/Identity.Mvc.Jwt/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://s3.amazonaws.com/revstack/icons/revstackcore-64x64.png</PackageIconUrl>
     <Copyright>Copyright 2017</Copyright>
     <PackageTags>RevStackCore AspNetCore Identity Json Web Tokens Mvc</PackageTags>
     <OutputType>Library</OutputType>
@@ -19,17 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JWT" Version="3.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.36.0" />
-    <PackageReference Include="RevStackCore.Identity.Mvc" Version="3.0.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="RevStackCore.Identity.Mvc" Version="9.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Extensions\" />
     <Folder Include="Generator\" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 </Project>
